@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbsfdx.system.mapper.StudentEvaluationMapper">
+  <resultMap id="BaseResultMap" type="com.hbsfdx.system.pojo.StudentEvaluation">
+    <id column="student_id" jdbcType="BIGINT" property="studentId" />
+    <result column="class_id" jdbcType="BIGINT" property="classId" />
+    <result column="A1" jdbcType="BIGINT" property="a1" />
+    <result column="A2" jdbcType="BIGINT" property="a2" />
+    <result column="A3" jdbcType="BIGINT" property="a3" />
+    <result column="A4" jdbcType="BIGINT" property="a4" />
+    <result column="A5" jdbcType="BIGINT" property="a5" />
+    <result column="A6" jdbcType="BIGINT" property="a6" />
+    <result column="R1" jdbcType="BIGINT" property="r1" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    student_id, class_id, A1, A2, A3, A4, A5, A6, R1
+  </sql>
+  <select id="selectByExample" parameterType="com.hbsfdx.system.pojo.StudentEvaluationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student_evaluation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student_evaluation
+    where student_id = #{studentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from student_evaluation
+    where student_id = #{studentId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hbsfdx.system.pojo.StudentEvaluationExample">
+    delete from student_evaluation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbsfdx.system.pojo.StudentEvaluation">
+    insert into student_evaluation (student_id, class_id, A1, 
+      A2, A3, A4, A5, 
+      A6, R1)
+    values (#{studentId,jdbcType=BIGINT}, #{classId,jdbcType=BIGINT}, #{a1,jdbcType=BIGINT}, 
+      #{a2,jdbcType=BIGINT}, #{a3,jdbcType=BIGINT}, #{a4,jdbcType=BIGINT}, #{a5,jdbcType=BIGINT}, 
+      #{a6,jdbcType=BIGINT}, #{r1,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbsfdx.system.pojo.StudentEvaluation">
+    insert into student_evaluation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="a1 != null">
+        A1,
+      </if>
+      <if test="a2 != null">
+        A2,
+      </if>
+      <if test="a3 != null">
+        A3,
+      </if>
+      <if test="a4 != null">
+        A4,
+      </if>
+      <if test="a5 != null">
+        A5,
+      </if>
+      <if test="a6 != null">
+        A6,
+      </if>
+      <if test="r1 != null">
+        R1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="studentId != null">
+        #{studentId,jdbcType=BIGINT},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="a1 != null">
+        #{a1,jdbcType=BIGINT},
+      </if>
+      <if test="a2 != null">
+        #{a2,jdbcType=BIGINT},
+      </if>
+      <if test="a3 != null">
+        #{a3,jdbcType=BIGINT},
+      </if>
+      <if test="a4 != null">
+        #{a4,jdbcType=BIGINT},
+      </if>
+      <if test="a5 != null">
+        #{a5,jdbcType=BIGINT},
+      </if>
+      <if test="a6 != null">
+        #{a6,jdbcType=BIGINT},
+      </if>
+      <if test="r1 != null">
+        #{r1,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbsfdx.system.pojo.StudentEvaluationExample" resultType="java.lang.Long">
+    select count(*) from student_evaluation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update student_evaluation
+    <set>
+      <if test="record.studentId != null">
+        student_id = #{record.studentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.classId != null">
+        class_id = #{record.classId,jdbcType=BIGINT},
+      </if>
+      <if test="record.a1 != null">
+        A1 = #{record.a1,jdbcType=BIGINT},
+      </if>
+      <if test="record.a2 != null">
+        A2 = #{record.a2,jdbcType=BIGINT},
+      </if>
+      <if test="record.a3 != null">
+        A3 = #{record.a3,jdbcType=BIGINT},
+      </if>
+      <if test="record.a4 != null">
+        A4 = #{record.a4,jdbcType=BIGINT},
+      </if>
+      <if test="record.a5 != null">
+        A5 = #{record.a5,jdbcType=BIGINT},
+      </if>
+      <if test="record.a6 != null">
+        A6 = #{record.a6,jdbcType=BIGINT},
+      </if>
+      <if test="record.r1 != null">
+        R1 = #{record.r1,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update student_evaluation
+    set student_id = #{record.studentId,jdbcType=BIGINT},
+      class_id = #{record.classId,jdbcType=BIGINT},
+      A1 = #{record.a1,jdbcType=BIGINT},
+      A2 = #{record.a2,jdbcType=BIGINT},
+      A3 = #{record.a3,jdbcType=BIGINT},
+      A4 = #{record.a4,jdbcType=BIGINT},
+      A5 = #{record.a5,jdbcType=BIGINT},
+      A6 = #{record.a6,jdbcType=BIGINT},
+      R1 = #{record.r1,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hbsfdx.system.pojo.StudentEvaluation">
+    update student_evaluation
+    <set>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="a1 != null">
+        A1 = #{a1,jdbcType=BIGINT},
+      </if>
+      <if test="a2 != null">
+        A2 = #{a2,jdbcType=BIGINT},
+      </if>
+      <if test="a3 != null">
+        A3 = #{a3,jdbcType=BIGINT},
+      </if>
+      <if test="a4 != null">
+        A4 = #{a4,jdbcType=BIGINT},
+      </if>
+      <if test="a5 != null">
+        A5 = #{a5,jdbcType=BIGINT},
+      </if>
+      <if test="a6 != null">
+        A6 = #{a6,jdbcType=BIGINT},
+      </if>
+      <if test="r1 != null">
+        R1 = #{r1,jdbcType=BIGINT},
+      </if>
+    </set>
+    where student_id = #{studentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hbsfdx.system.pojo.StudentEvaluation">
+    update student_evaluation
+    set class_id = #{classId,jdbcType=BIGINT},
+      A1 = #{a1,jdbcType=BIGINT},
+      A2 = #{a2,jdbcType=BIGINT},
+      A3 = #{a3,jdbcType=BIGINT},
+      A4 = #{a4,jdbcType=BIGINT},
+      A5 = #{a5,jdbcType=BIGINT},
+      A6 = #{a6,jdbcType=BIGINT},
+      R1 = #{r1,jdbcType=BIGINT}
+    where student_id = #{studentId,jdbcType=BIGINT}
+  </update>
+</mapper>

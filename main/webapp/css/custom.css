@@ -1,0 +1,36 @@
+/* your styles go here */
+/* your styles go here */
+.page-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.message {
+    width: 50%;
+}
+
+.message-item {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px 0px;
+    background-color: white;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius:25px;
+    margin: 50px 10px;
+    box-shadow: #5c6287 0px 0px 2px 2px;
+}
+
+.message-item-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.message-item-content {
+    padding: 0px 20px;
+}
+

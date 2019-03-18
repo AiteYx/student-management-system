@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+    <!-- 开启扫描基础包及其以下包，是否有@controller等注解 -->
+    <context:component-scan base-package="com.hbsfdx.system.controller" />
+
+    <!-- 开启使用注解，即同时配置了三大组件中的两个,映射器与适配器  -->
+    <mvc:annotation-driven/>
+
+    <!-- 三大组件-视图解析器 配置请求路径的前后缀  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--启用默认servlet，静态资源放行，目前没用-->
+    <!--<mvc:annotation-driven/>-->
+    <!--<mvc:resources mapping="/js/**" location="/js/"/>-->
+    <!--<mvc:resources mapping="/css/**" location="/css/"/>-->
+    <!--<mvc:resources mapping="/img/**" location="/img/"/>-->
+    <!--<mvc:resources mapping="/fonts/**" location="/fonts/"/>-->
+    <!--<mvc:resources mapping="/vendor/**" location="/vendor/"/>-->
+    <!--<mvc:resources mapping="/data/**" location="/data/"/>-->
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <!--登录拦截器-->
+        <mvc:interceptor>
+            <!--对所有路径拦截-->
+            <mvc:mapping path="/**" />
+            <!--不拦截的路径-->
+            <mvc:exclude-mapping path="/login.do" />
+            <bean class="com.hbsfdx.system.controller.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+
+        <!--班委功能的拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/ClassMessage.do" />
+            <mvc:mapping path="/PushMessage.do" />
+            <bean class="com.hbsfdx.system.controller.interceptor.ClassPermissionsInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

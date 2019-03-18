@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbsfdx.system.mapper.ClassCheckingInMapper">
+  <resultMap id="BaseResultMap" type="com.hbsfdx.system.pojo.ClassCheckingIn">
+    <result column="student_id" jdbcType="BIGINT" property="studentId" />
+    <result column="class_id" jdbcType="BIGINT" property="classId" />
+    <result column="term" jdbcType="VARCHAR" property="term" />
+    <result column="week_times" jdbcType="BIGINT" property="weekTimes" />
+    <result column="week" jdbcType="VARCHAR" property="week" />
+    <result column="course_time" jdbcType="VARCHAR" property="courseTime" />
+    <result column="absenteeism" jdbcType="BIGINT" property="absenteeism" />
+    <result column="late" jdbcType="BIGINT" property="late" />
+    <result column="ask_for_leave" jdbcType="BIGINT" property="askForLeave" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    student_id, class_id, term, week_times, week, course_time, absenteeism, late, ask_for_leave
+  </sql>
+  <select id="selectByExample" parameterType="com.hbsfdx.system.pojo.ClassCheckingInExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from class_checking_in
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hbsfdx.system.pojo.ClassCheckingInExample">
+    delete from class_checking_in
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hbsfdx.system.pojo.ClassCheckingIn">
+    insert into class_checking_in (student_id, class_id, term, 
+      week_times, week, course_time, 
+      absenteeism, late, ask_for_leave
+      )
+    values (#{studentId,jdbcType=BIGINT}, #{classId,jdbcType=BIGINT}, #{term,jdbcType=VARCHAR}, 
+      #{weekTimes,jdbcType=BIGINT}, #{week,jdbcType=VARCHAR}, #{courseTime,jdbcType=VARCHAR}, 
+      #{absenteeism,jdbcType=BIGINT}, #{late,jdbcType=BIGINT}, #{askForLeave,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hbsfdx.system.pojo.ClassCheckingIn">
+    insert into class_checking_in
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="term != null">
+        term,
+      </if>
+      <if test="weekTimes != null">
+        week_times,
+      </if>
+      <if test="week != null">
+        week,
+      </if>
+      <if test="courseTime != null">
+        course_time,
+      </if>
+      <if test="absenteeism != null">
+        absenteeism,
+      </if>
+      <if test="late != null">
+        late,
+      </if>
+      <if test="askForLeave != null">
+        ask_for_leave,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="studentId != null">
+        #{studentId,jdbcType=BIGINT},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="term != null">
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="weekTimes != null">
+        #{weekTimes,jdbcType=BIGINT},
+      </if>
+      <if test="week != null">
+        #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTime != null">
+        #{courseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="absenteeism != null">
+        #{absenteeism,jdbcType=BIGINT},
+      </if>
+      <if test="late != null">
+        #{late,jdbcType=BIGINT},
+      </if>
+      <if test="askForLeave != null">
+        #{askForLeave,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hbsfdx.system.pojo.ClassCheckingInExample" resultType="java.lang.Long">
+    select count(*) from class_checking_in
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update class_checking_in
+    <set>
+      <if test="record.studentId != null">
+        student_id = #{record.studentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.classId != null">
+        class_id = #{record.classId,jdbcType=BIGINT},
+      </if>
+      <if test="record.term != null">
+        term = #{record.term,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weekTimes != null">
+        week_times = #{record.weekTimes,jdbcType=BIGINT},
+      </if>
+      <if test="record.week != null">
+        week = #{record.week,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseTime != null">
+        course_time = #{record.courseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.absenteeism != null">
+        absenteeism = #{record.absenteeism,jdbcType=BIGINT},
+      </if>
+      <if test="record.late != null">
+        late = #{record.late,jdbcType=BIGINT},
+      </if>
+      <if test="record.askForLeave != null">
+        ask_for_leave = #{record.askForLeave,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update class_checking_in
+    set student_id = #{record.studentId,jdbcType=BIGINT},
+      class_id = #{record.classId,jdbcType=BIGINT},
+      term = #{record.term,jdbcType=VARCHAR},
+      week_times = #{record.weekTimes,jdbcType=BIGINT},
+      week = #{record.week,jdbcType=VARCHAR},
+      course_time = #{record.courseTime,jdbcType=VARCHAR},
+      absenteeism = #{record.absenteeism,jdbcType=BIGINT},
+      late = #{record.late,jdbcType=BIGINT},
+      ask_for_leave = #{record.askForLeave,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
